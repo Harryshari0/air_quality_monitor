@@ -1,0 +1,7 @@
+{
+  "name": "Urban Air Quality Monitor",
+  "description": "A comprehensive urban air quality monitoring dashboard with real-time data, AQI predictions, and health alerts.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

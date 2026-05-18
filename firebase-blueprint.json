@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Application user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string", "description": "User's full name" },
+        "email": { "type": "string", "description": "User's email address" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" },
+            "city": { "type": "string" }
+          }
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "AirQualityData": {
+      "title": "Air Quality Data",
+      "description": "Historical air quality measurements",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" },
+            "city": { "type": "string" }
+          }
+        },
+        "pm25": { "type": "number" },
+        "pm10": { "type": "number" },
+        "co": { "type": "number" },
+        "no2": { "type": "number" },
+        "aqi": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["aqi", "timestamp"]
+    },
+    "Alert": {
+      "title": "Alert",
+      "description": "Air quality health alerts",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "message": { "type": "string" },
+        "level": { "type": "string", "enum": ["info", "warning", "critical"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "city": { "type": "string" }
+      },
+      "required": ["userId", "message", "level", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/air_quality_data/{dataId}": {
+      "schema": "AirQualityData",
+      "description": "Historical air quality records"
+    },
+    "/alerts/{alertId}": {
+      "schema": "Alert",
+      "description": "User-specific alerts"
+    }
+  }
+}
